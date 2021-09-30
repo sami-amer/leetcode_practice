@@ -6,7 +6,7 @@ def lengthOfLongestSubstring(s):
             tmp += letter
         else:
             counts.add(len(tmp))
-            tmp = tmp[tmp.index(letter)+1:] + letter
+            tmp = tmp[tmp.index(letter)+1:] + letter  # ! This indexing was the biggest difference between my solution and the working solution.
     counts.add(len(tmp))
     return max(counts)
             
