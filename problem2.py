@@ -23,7 +23,7 @@ def addTwoNumbers(l1,l2):
 
 
 if __name__ == '__main__':
-    L1 = ListNode(2,ListNode(4,3))
-    L2 = ListNode(5,ListNode(6,4))
+    L1 = ListNode(2,ListNode(4)) # Everything has to be a linkednode, can't have an int as a .next (this was a mistake when I was solving it on my own)
+    L2 = ListNode(5,ListNode(6))
     print(addTwoNumbers(L1,L2))
     
