@@ -23,7 +23,7 @@ def listify(L):
             
 def addTwoNumbers(l1,l2):
     firstResult = l1.val + l2.val
-    outInts= [l1.val + l2.val]
+    outInts= ListNode(firstResult)
     return listify(add(l1.next, l2.next, outInts))
 
 def add(l1,l2,outInts):
@@ -36,10 +36,14 @@ def add(l1,l2,outInts):
         if type(l1) == int:
             mod.append(l1)
             first = True
+        elif l1 == None:
+            first = True
         else:
             mod.append(l1.val)
         if type(l2) == int:
             mod.append(l2)
+            second = True
+        elif l2 == None:
             second = True
         else:
             mod.append(l2.val)
