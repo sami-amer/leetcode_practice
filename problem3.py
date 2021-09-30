@@ -1,16 +1,19 @@
-def lengthOfLongestSubstring(s):
+def lengthOfLongestSubstring(s, count = 0, counts = set()):
+    if not s:
+        return counts
     seen = set()
-    count = 0
-    counts = []
     for letter in s:
         if letter not in seen:
             count += 1
             seen.add(letter)
         elif letter in seen:
-            counts.append(count)    
+            counts.add(count)    
             count = 0
-            seen = set()
-    return max(counts)
+            # seen = set(letter)
+            lengthOfLongestSubstring(s[1:], count, counts)
+    # counts.add(count)
+    
+    return counts
             
 
 
@@ -18,4 +21,6 @@ def lengthOfLongestSubstring(s):
 
 if __name__ == "__main__":
     s = "pwwkew"
-    print(lengthOfLongestSubstring(s))
+    s2 = "dvdf"
+    s3 = "bbbbb"
+    print(lengthOfLongestSubstring(s3))
