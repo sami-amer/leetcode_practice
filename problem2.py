@@ -1,63 +1,24 @@
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
-        self.next = next
+        self.next = next         
 
-def listify(L):
-    output = []
-    hold = []
-    for elem in L:
-        if hold:
-            num = elem + hold[0]
-            hold = []
-        else:
-            num = elem
-        if num <10:
-            output.append(num)
-            continue
-        elif num >= 10:
-            output.append(0)
-            hold.append(num - 9)
-            continue
-    return output
-            
 def addTwoNumbers(l1,l2):
-    firstResult = l1.val + l2.val
-    outInts= ListNode(firstResult)
-    return listify(add(l1.next, l2.next, outInts))
+    result = ListNode(0) # initialize the LinkedList
+    result_tail = result
+    carry = 0
 
-def add(l1,l2,outInts):
-    try:
-        outInts.append(l1.val + l2.val)
-    except AttributeError:
-        mod = []
-        first = False
-        second = False
-        if type(l1) == int:
-            mod.append(l1)
-            first = True
-        elif l1 == None:
-            first = True
-        else:
-            mod.append(l1.val)
-        if type(l2) == int:
-            mod.append(l2)
-            second = True
-        elif l2 == None:
-            second = True
-        else:
-            mod.append(l2.val)
-        
-        outInts.append(sum(mod))
-        mod = []
+    while l1 or l2 or carry: # *NOTE: instead of recursing, keep going until everything is NONE
+        val1 = (l1.val if l1 else 0) # *NOTE: Use comprehension instead of if else statements for a cleaner line
+        val2 = (l2.val if l2 else 0)
+        carry, out = divmod(val1 + val2 +carry, 10) #! NEW BUILT-IN: divmod returns quotient and remainder
 
-        if first and second:
-            return outInts
-        elif first:
-            return add(None, l2.next, outInts)
-        elif second:
-            return add(l1.next, None, outInts)
-    return add(l1.next, l2.next, outInts)        
+        result_tail.next = ListNode(out) # We add the result to the initialized linked list
+        result_tail = result_tail.next # We move our working list to the end of our linked list
+        l1 = (l1.next if l1 else None) # Again, checking for None with comprehension
+        l2 = (l2.next if l2 else None)
+    
+    return result.next # skips the first 0
         
 
 
