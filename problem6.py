@@ -1,11 +1,20 @@
 def convert(s, numRows):
-    output = ['']*len(s)
-    connectorLength = numRows - 2 if numRows - 2 > 0 else 0
-    for i in range(len(s)):
-        location = divmod(i,numRows)
-        print(location)
-        output[location[0]*numRows + location[1]] = s[i]
-    return str(output)
+    rows, row = min(numRows, len(s)), 0
+    arr, flag = ["" for _ in range(rows)], 1
+
+    for letter in s:
+        if row == rows:
+            flag = -1
+            row = max(row-2,0)
+        if row == 0:
+            flag = 1
+        if flag == -1:
+            arr[row] += letter
+            row -= 1
+        if flag == 1:
+            arr[row] += letter
+            row += 1
+    return "".join(arr)
 
 if __name__ == '__main__':
     input1 = ("PAYPALISHIRING",3)
