@@ -1,19 +1,29 @@
-from typing import DefaultDict
-
 
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        # hash 2 sum in O(n^2) and then iterate in O(n) for O(n^2)?
-        answer = []
-        twoSum = DefaultDict()
-        for i in range(len(nums)):
-            for j in range(len(nums)):
-                twoSum[nums[i] + nums[j]] = str(nums[i]) + ',' +str(nums[j])
-        for num in nums:
-            if -num in twoSum:
-                unpacked = [*twoSum[-num].split(",")]
-                answer.append([num, int(unpacked[0]), int(unpacked[1])])
-        return answer
+        results = []
+        nums.sort()
+        for i in range(len(nums) - 2): # - 2 because we want to stop when we run out of pairs of 3
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            l = i+1
+            r = len(nums) - 1
+            
+            while l < r:
+                s = nums[i] + nums[l] + nums[r]
+                if s < 0 : 
+                    l += 1 
+                elif s > 0:
+                    r -= 1
+                else: # This means we found an answer
+                    results.append((nums[i],nums[l],nums[r]))
+                    while l < r and nums [l] == nums [l+1]: # we need to avoid duplicates
+                        l += 1
+                    while l< r and nums[r] == nums[r-1]:
+                        r -= 1
+                    l+=1; r-=1 # we then move them one step
+        return results
+
 
 
 
