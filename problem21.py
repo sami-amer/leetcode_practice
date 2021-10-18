@@ -10,8 +10,7 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, l1, l2):
-        output = ListNode()
-        tracker = output
+        tracker = output = ListNode()
         while l1 or l2:
             if not l1:
                 tracker.next = (ListNode(l2.val))
