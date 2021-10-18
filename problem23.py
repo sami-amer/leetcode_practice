@@ -16,7 +16,6 @@ class Solution:
                     res[traversal.val] += 1
                     traversal = traversal.next
                 res[traversal.val] += 1
-        print(res)
         for key in sorted(res.keys()):
             if res[key] == 0:
                 continue
