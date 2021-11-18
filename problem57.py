@@ -21,4 +21,4 @@ if __name__ == '__main__':
     intervals = [[1,3],[6,9]]
     newInterval = [2,5]
     # output = [[1,5],[6,9]]
-    print(Solution.insert(None,intervals, newInterval)
+    print(Solution.insert(None,intervals, newInterval))
